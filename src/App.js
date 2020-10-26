@@ -104,9 +104,8 @@ function App() {
 
   function handleRemoteClick(event) {
     const command = urls[event.currentTarget.dataset.command]
-    const commandURL = `http://${url}/control/rcem?KEY${command}`
+    const commandURL = `${url}/control/rcem?KEY${command}`
     fetch(commandURL, {
-      method: 'POST',
       mode: 'no-cors',
     })
   }
