@@ -1,33 +1,24 @@
-# Getting Started with Create React App
+# Coolstream remote app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Recently my TV remote control got broken :-( And I was too stingy to buy a new one.
+Since I knew that I can control my receiver via get request, I built a react app remote control app.
+Since I have two reveiver, I built a switch directly into the app, which lets me control both receivers.
 
-## Available Scripts
+I wrote a small express server that runs on my raspberry pi and makes the react app available on the local network.
 
-In the project directory, you can run:
+<img src="docs/screen_remote.jpg" alt="screen" width="250"/>
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Clone the repo and cd in directory
+- run `npm install`
+- run `npm run build`
+- run `npm run server`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+~~### `npm test`~~
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+~~Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.~~
 
 ### `npm run eject`
 
@@ -44,22 +35,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
 ### Deployment
 
