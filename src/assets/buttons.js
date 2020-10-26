@@ -15,6 +15,8 @@ import { ReactComponent as PlayBtn } from './play_arrow-white-48dp.svg'
 import { ReactComponent as ForwardBtn } from './fast_forward-white-48dp.svg'
 import { ReactComponent as NavPlayRoomBtn } from './sports_esports-white-48dp.svg'
 import { ReactComponent as NavLivingRoomBtn } from './weekend-white-48dp.svg'
+import { ReactComponent as InfoBtn } from './info-white-48dp.svg'
+import { ReactComponent as PreviewBtn } from './preview-white-48dp.svg'
 
 export {
   CloseBtn,
@@ -34,4 +36,6 @@ export {
   ForwardBtn,
   NavPlayRoomBtn,
   NavLivingRoomBtn,
+  InfoBtn,
+  PreviewBtn,
 }

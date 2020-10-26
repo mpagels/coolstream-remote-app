@@ -16,46 +16,60 @@ import {
   ForwardBtn,
   NavPlayRoomBtn,
   NavLivingRoomBtn,
+  InfoBtn,
+  PreviewBtn,
 } from './assets/buttons'
+import { urls } from './utils/urls'
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function App() {
-  const [room, setRoom] = useState('daddelzimmer')
+  const [room, setRoom] = useState("")
+  const url = room === "wohnzimmer" ? process.env.REACT_APP_WOHNZIMMER : process.env.DADDELZIMMER
+
+  useEffect(() => {
+    setRoom(localStorage.getItem("room") || "wohnzimmer")
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("room", room)
+  }, [room])
   return (
     <>
       <Title>{room.toUpperCase()}</Title>
       <TopButtons>
-        <FavoriteBtn />
-        <MuteBtn />
+        <FavoriteBtn data-command="play" onClick={handleRemoteClick} />
+        <MuteBtn data-command="mute" onClick={handleRemoteClick}/>
       </TopButtons>
       <MainButtonsContainer>
         <MainUp>
-          <NavUpBtn />
+          <PreviewBtn data-command="epg" onClick={handleRemoteClick}/>
+          <NavUpBtn data-command="up" onClick={handleRemoteClick}/>
+          <InfoBtn data-command="info" onClick={handleRemoteClick}/>
         </MainUp>
         <MainMiddel>
-          <NavLeftBtn />
-          <NavOKBtn width={'80px'} height={'80px'} />
-          <NavRigthBtn />
+          <NavLeftBtn data-command="left" onClick={handleRemoteClick}/>
+          <NavOKBtn data-command="ok" width={'80px'} height={'80px'}  onClick={handleRemoteClick}  />
+          <NavRigthBtn data-command="right" onClick={handleRemoteClick}/>
         </MainMiddel>
         <MainDown>
-          <MenuBtn style={{ alignSelf: 'end' }} />
-          <NavDownBtn height={'100px'} />
-          <CloseBtn style={{ alignSelf: 'end' }} />
+          <MenuBtn data-command="menu" onClick={handleRemoteClick} style={{ alignSelf: 'end' }} />
+          <NavDownBtn data-command="down" onClick={handleRemoteClick} height={'100px'} />
+          <CloseBtn data-command="exit" onClick={handleRemoteClick}style={{ alignSelf: 'end' }} />
         </MainDown>
       </MainButtonsContainer>
       <RadioBtnContainer>
-        <RadioBtn color="red" />
-        <RadioBtn color="green" />
-        <RadioBtn color="jellow" />
-        <RadioBtn color="blue" />
+        <RadioBtn data-command="red" onClick={handleRemoteClick}  />
+        <RadioBtn data-command="green" onClick={handleRemoteClick}  />
+        <RadioBtn data-command="yellow" onClick={handleRemoteClick}  />
+        <RadioBtn data-command="blue" onClick={handleRemoteClick}  />
       </RadioBtnContainer>
       <MediaControlContainer>
-        <RewindBtn />
-        <StopBtn />
-        <PauseBtn />
-        <PlayBtn />
-        <ForwardBtn />
+        <RewindBtn data-command="rewind" onClick={handleRemoteClick} />
+        <StopBtn data-command="stop" onClick={handleRemoteClick} />
+        <PauseBtn data-command="pause" onClick={handleRemoteClick}/>
+        <PlayBtn data-command="play" onClick={handleRemoteClick} />
+        <ForwardBtn data-command="forward" onClick={handleRemoteClick}/>
       </MediaControlContainer>
       <NavBar>
         <NavPlayRoomBtn onClick={() => handleRoomChange('daddelzimmer')} />
@@ -66,6 +80,12 @@ function App() {
 
   function handleRoomChange(newRoom) {
     room !== newRoom && setRoom(newRoom)
+  }
+
+  function handleRemoteClick(event) {
+    const command = urls[event.currentTarget.dataset.command]
+    const commandURL = `http://${url}/control/rcem?KEY${command}`
+    fetch(commandURL, {mode: 'no-cors'})
   }
 }
 
@@ -82,13 +102,15 @@ const TopButtons = styled.div`
 const MainButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 `
 
 const MainUp = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   height: 100px;
 `
+
 const MainMiddel = styled.div`
   display: flex;
   justify-content: center;
