@@ -17,8 +17,14 @@ import { ReactComponent as NavPlayRoomBtn } from './sports_esports-white-48dp.sv
 import { ReactComponent as NavLivingRoomBtn } from './weekend-white-48dp.svg'
 import { ReactComponent as InfoBtn } from './info-white-48dp.svg'
 import { ReactComponent as PreviewBtn } from './preview-white-48dp.svg'
+import { ReactComponent as VolumeUpBtn } from './volume_up-white-48dp.svg'
+import { ReactComponent as VolumeDownBtn } from './volume_down-white-48dp.svg'
+import { ReactComponent as SettingBtn } from './settings-white-48dp.svg'
 
 export {
+  SettingBtn,
+  VolumeUpBtn,
+  VolumeDownBtn,
   CloseBtn,
   FavoriteBtn,
   MuteBtn,

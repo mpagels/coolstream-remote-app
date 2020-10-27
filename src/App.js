@@ -1,4 +1,6 @@
 import {
+  VolumeUpBtn,
+  VolumeDownBtn,
   CloseBtn,
   FavoriteBtn,
   MuteBtn,
@@ -14,34 +16,37 @@ import {
   PauseBtn,
   PlayBtn,
   ForwardBtn,
-  NavPlayRoomBtn,
-  NavLivingRoomBtn,
   InfoBtn,
   PreviewBtn,
+  SettingBtn,
 } from './assets/buttons'
 import { urls } from './utils/urls'
+import SettingModal from './components/modals/SettingModal'
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 
 function App() {
-  const [room, setRoom] = useState('')
-  const url =
-    room === 'wohnzimmer'
-      ? process.env.REACT_APP_WOHNZIMMER
-      : process.env.REACT_APP_DADDELZIMMER
+  const [isSetting, setIsSetting] = useState(true)
+  const [ip, setIP] = useState('')
 
   useEffect(() => {
-    setRoom(localStorage.getItem('room') || 'wohnzimmer')
+    setIP(localStorage.getItem('ip') || '')
   }, [])
 
-  useEffect(() => {
-    localStorage.setItem('room', room)
-  }, [room])
   return (
     <>
-      <Title>{room.toUpperCase()}</Title>
+      {(ip === '' || isSetting) && (
+        <SettingModal
+          value={ip}
+          onClick={handleIpSave}
+          onchange={handleOnChange}
+        />
+      )}
+      <Title>{'Coolstream'.toUpperCase()}</Title>
       <TopButtons>
         <FavoriteBtn data-command="play" onClick={handleRemoteClick} />
+        <VolumeDownBtn data-command="volumeDown" onClick={handleRemoteClick} />
+        <VolumeUpBtn data-command="volumeUp" onClick={handleRemoteClick} />
         <MuteBtn data-command="mute" onClick={handleRemoteClick} />
       </TopButtons>
       <MainButtonsContainer>
@@ -112,20 +117,25 @@ function App() {
         <ForwardBtn data-command="forward" onClick={handleRemoteClick} />
       </MediaControlContainer>
       <NavBar>
-        <NavPlayRoomBtn onClick={() => handleRoomChange('daddelzimmer')} />
-        <NavLivingRoomBtn onClick={() => handleRoomChange('wohnzimmer')} />
+        <SettingBtn onClick={() => setIsSetting(true)} />
       </NavBar>
     </>
   )
 
-  function handleRoomChange(newRoom) {
-    room !== newRoom && setRoom(newRoom)
-  }
-
   function handleRemoteClick(event) {
     const command = urls[event.currentTarget.dataset.command]
-    const commandURL = `http://${url}/control/rcem?KEY${command}`
+    const commandURL = `http://${ip}/control/rcem?KEY${command}`
     fetch(commandURL, { mode: 'no-cors' })
+  }
+
+  function handleIpSave(event) {
+    event.preventDefault()
+    localStorage.setItem('ip', ip)
+    setIsSetting(false)
+  }
+
+  function handleOnChange(event) {
+    setIP(event.currentTarget.value)
   }
 }
 
