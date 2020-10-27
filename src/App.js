@@ -26,7 +26,7 @@ import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 
 function App() {
-  const [isSetting, setIsSetting] = useState(true)
+  const [isSetting, setIsSetting] = useState(false)
   const [ip, setIP] = useState('')
 
   useEffect(() => {
@@ -136,6 +136,7 @@ function App() {
 
   function handleOnChange(event) {
     setIP(event.currentTarget.value)
+    setIsSetting(true)
   }
 }
 
