@@ -1,0 +1,22 @@
+export const urls = {
+    fav : "_PLAY",
+    mute : "_MUTE",
+    up: "_UP",
+    down: "_DOWN",
+    left: "_LEFT",
+    right: "_RIGHT",
+    ok: "_OK",
+    menu: "_SETUP",
+    exit: "_HOME",
+    red: "_RED",
+    green: "_GREEN",
+    yellow: "_YELLOW",
+    blue: "_BLUE",
+    rewind: "_REWIND",
+    forward: "_FORWARD",
+    play: "_PLAY",
+    pause: "_PAUSE",
+    stop: "_STOP",
+    info: "_INFO",
+    epg: "_EPG"
+}
